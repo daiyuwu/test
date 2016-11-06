@@ -1,11 +1,25 @@
-console.log('-- PREPROCESS --');
 var $printTarget = document.getElementById("test_print_block");
 
-console.log('-- START --');
 var times3 = 3, times5 = 5, timesboth = times3*times5;
 
-print('test');
-print('test2');
+for(i = 1; i <= 100; i++){
+	print(doSomething(i));
+}
+
+function doSomething(input) {
+	var output = "";
+	
+	if(0 == input % timesboth)
+		output = "fizzbuzz";
+	else if(0 == input % times5)
+		output = "fizz";
+	else if(0 == input % times3)
+		output = "buzz";
+	else
+		output = input;
+
+	return output;
+}
 
 function print(msg) {
 	appendPrint(msg);
@@ -17,7 +31,9 @@ function normalPrint(msg) {
 
 function appendPrint(msg) {
 	var tmpContent = $printTarget.innerText;
-	tmpContent += msg + "\r";
+	if("" != tmpContent)
+		tmpContent += "\r\n";
+	tmpContent += msg;
 	$printTarget.innerText = tmpContent;
 }
 
